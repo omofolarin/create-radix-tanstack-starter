@@ -14,12 +14,12 @@ if (!fs.existsSync(targetDir)) {
 
 // Copy template files
 const copyTemplate = async () => {
-  const templateFiles = fs.readdirSync(path.join(templateDir, "template"));
-  
+  const templateFiles = fs.readdirSync(templateDir);
+
   for (const file of templateFiles) {
-    const srcPath = path.join(templateDir, "template", file);
+    const srcPath = path.join(templateDir, file);
     const destPath = path.join(targetDir, file);
-    
+
     if (fs.statSync(srcPath).isDirectory()) {
       fs.cpSync(srcPath, destPath, { recursive: true });
     } else {
@@ -31,13 +31,13 @@ const copyTemplate = async () => {
 // Initialize project
 const initProject = async () => {
   console.log("Creating your Radix UI + TanStack project...");
-  
+
   await copyTemplate();
-  
+
   // Change to project directory and install dependencies
   process.chdir(targetDir);
   await $`bun install`;
-  
+
   console.log(`
 Project created successfully! 🎉
 
