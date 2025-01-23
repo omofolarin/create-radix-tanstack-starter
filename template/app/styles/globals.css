@@ -1,0 +1,40 @@
+/* @import './themes.css'; */
+/* @import '@radix-ui/themes/styles.css'; */
+@import '@radix-ui/themes/styles.css';
+/* @import '@fontsource/inter';
+@import '@fontsource/fira-code';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css'; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+  }
+
+  body {
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
+  }
+}
+
+@layer utilities {
+  .step {
+    counter-increment: step;
+  }
+
+  .step:before {
+    /* @apply bg-muted absolute inline-flex h-9 w-9 items-center justify-center rounded-full text-center -indent-px font-mono font-medium;
+    @apply mt-[-4px] ml-[-50px]; */
+    content: counter(step);
+    font-size: 1rem; /* Equivalent to text-base */
+  }
+}

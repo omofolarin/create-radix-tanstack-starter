@@ -1,0 +1,18 @@
+1. use bun / bunx, format with prettier
+2. here's how to use radix textfield: Note the radix-ui theme TextField has no TextField.Input instead it uses TextField.Root
+   < TextField.Root placeholder = "Search the docs…" >
+      <TextField.Slot>
+      <MagnifyingGlassIcon height="16" width = "16" />
+         </TextField.Slot>
+         </TextField.Root>
+
+3. A < Select.Item /> must have a value prop that is not an empty string
+4. Use Tailwind color tokens that map to Radix UI design tokens:
+
+- Use gray - { 1-12 } for solid grays, gray - a{ 1-12 } for alpha grays
+   - Use accent - { 1-12 } for solid accents, accent - a{ 1-12 } for alpha accents
+      - Use semantic colors like background, foreground, muted, border, primary, etc.
+   - Never use raw CSS variables(var(--\*)) in classes, use the Tailwind mappings
+
+5. There's Tabs.Root, Tabs.Content Tabs.List from Tabs component from @radix-ui/theme
+6. The project uses @tanstack/starter and @tanstack/router.Use the file routing patter in "docs/file-based-routing.md" and ensure to use the dot notation
