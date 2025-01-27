@@ -1,37 +1,8 @@
-
-
 ---
 title: File-Based Routing
 ---
 
 Most of the TanStack Router documentation is written for file-based routing and is intended to help you understand in more detail how to configure file-based routing and the technical details behind how it works. While file-based routing is the preferred and recommended way to configure TanStack Router, you can also use [code-based routing](./code-based-routing.md) if you prefer.
-
-## Directory Routes
-
-Directories can be used to denote route hierarchy, which can be useful for organizing multiple routes into logical groups and also cutting down on the filename length for large groups of deeply nested routes:
-
-| Filename                | Route Path                | Component Output                  |
-| ----------------------- | ------------------------- | --------------------------------- |
-| ʦ `__root.tsx`          |                           | `<Root>`                          |
-| ʦ `index.tsx`           | `/` (exact)               | `<Root><RootIndex>`               |
-| ʦ `about.tsx`           | `/about`                  | `<Root><About>`                   |
-| ʦ `posts.tsx`           | `/posts`                  | `<Root><Posts>`                   |
-| 📂 `posts`              |                           |                                   |
-| ┄ ʦ `index.tsx`         | `/posts` (exact)          | `<Root><Posts><PostsIndex>`       |
-| ┄ ʦ `$postId.tsx`       | `/posts/$postId`          | `<Root><Posts><Post>`             |
-| 📂 `posts_`             |                           |                                   |
-| ┄ 📂 `$postId`          |                           |                                   |
-| ┄ ┄ ʦ `edit.tsx`        | `/posts/$postId/edit`     | `<Root><EditPost>`                |
-| ʦ `settings.tsx`        | `/settings`               | `<Root><Settings>`                |
-| 📂 `settings`           |                           | `<Root><Settings>`                |
-| ┄ ʦ `profile.tsx`       | `/settings/profile`       | `<Root><Settings><Profile>`       |
-| ┄ ʦ `notifications.tsx` | `/settings/notifications` | `<Root><Settings><Notifications>` |
-| ʦ `_layout.tsx`         |                           | `<Root><Layout>`                  |
-| 📂 `_layout`            |                           |                                   |
-| ┄ ʦ `layout-a.tsx`      | `/layout-a`               | `<Root><Layout><LayoutA>`         |
-| ┄ ʦ `layout-b.tsx`      | `/layout-b`               | `<Root><Layout><LayoutB>`         |
-| 📂 `files`              |                           |                                   |
-| ┄ ʦ `$.tsx`             | `/files/$`                | `<Root><Files>`                   |
 
 ## Flat Routes
 
@@ -53,29 +24,6 @@ Flat routing gives you the ability to use `.`s to denote route nesting levels. T
 | ʦ `_layout.layout-a.tsx`       | `/layout-a`               | `<Root><Layout><LayoutA>`         |
 | ʦ `_layout.layout-b.tsx`       | `/layout-b`               | `<Root><Layout><LayoutB>`         |
 | ʦ `files.$.tsx`                | `/files/$`                | `<Root><Files>`                   |
-
-## Mixed Flat and Directory Routes
-
-It's extremely likely that a 100% directory or flat route structure won't be the best fit for your project, which is why TanStack Router allows you to mix both flat and directory routes together to create a route tree that uses the best of both worlds where it makes sense:
-
-| Filename                       | Route Path                | Component Output                  |
-| ------------------------------ | ------------------------- | --------------------------------- |
-| ʦ `__root.tsx`                 |                           | `<Root>`                          |
-| ʦ `index.tsx`                  | `/` (exact)               | `<Root><RootIndex>`               |
-| ʦ `about.tsx`                  | `/about`                  | `<Root><About>`                   |
-| ʦ `posts.tsx`                  | `/posts`                  | `<Root><Posts>`                   |
-| 📂 `posts`                     |                           |                                   |
-| ┄ ʦ `index.tsx`                | `/posts` (exact)          | `<Root><Posts><PostsIndex>`       |
-| ┄ ʦ `$postId.tsx`              | `/posts/$postId`          | `<Root><Posts><Post>`             |
-| ┄ ʦ `$postId.edit.tsx`         | `/posts/$postId/edit`     | `<Root><Posts><Post><EditPost>`   |
-| ʦ `settings.tsx`               | `/settings`               | `<Root><Settings>`                |
-| ʦ `settings.profile.tsx`       | `/settings/profile`       | `<Root><Settings><Profile>`       |
-| ʦ `settings.notifications.tsx` | `/settings/notifications` | `<Root><Settings><Notifications>` |
-
-Both flat and directory routes can be mixed together to create a route tree that uses the best of both worlds where it makes sense.
-
-> [!TIP]
-> If you find the need to customize the location of your route files or completely override the discovery of routes, you can use [Virtual File Routes](./virtual-file-routes.md) to programmatically build your route tree while still getting the awesome benefits of file-based routing.
 
 ## Dynamic Path Params
 
@@ -104,10 +52,10 @@ To learn more about pathless routes, see the [Routing Concepts - Pathless Routes
 
 File-based routing requires that you follow a few simple file naming conventions to ensure that your routes are generated correctly. The concepts these conventions enable are covered in detail in the [Route Trees & Nesting](./route-trees.md) guide.
 
-> [!IMPORTANT]
-> Routes starting with `/api` are reserved and cannot not be used for file-based routing. These routes are reserved for future use by the TanStack Start for API routes. If you need to use routes starting with `/api` when using TanStack Router with file-based routing, then you'll need to configure the `apiBase` option to a different value.
+[!IMPORTANT]
+Routes starting with `/api` are reserved and cannot not be used for file-based routing. These routes are reserved for future use by the TanStack Start for API routes. If you need to use routes starting with `/api` when using TanStack Router with file-based routing, then you'll need to configure the `apiBase` option to a different value.
 
-> **💡 Remember:** The file-naming conventions for your project could be affected by what [options](#options) are configured in your `tsr.config.json`. By default, the `routeFileIgnorePrefix` option is set to `-`, as such files and directories starting with `-` will not be considered for routing.
+**💡 Remember:** The file-naming conventions for your project could be affected by what [options](#options) are configured in your `tsr.config.json`. By default, the `routeFileIgnorePrefix` option is set to `-`, as such files and directories starting with `-` will not be considered for routing.
 
 - **`__root.tsx`**
   - The root route file must be named `__root.tsx` and must be placed in the root of the configured `routesDirectory`.
